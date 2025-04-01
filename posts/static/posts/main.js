@@ -1,6 +1,7 @@
 console.log('hello world')
 
 const helloWorldBox = document.getElementById('hello-world')
+const postsBox = document.getElementById('posts-box')
 
 // helloWorldBox.innerHTML = 'hello <b>world</b>'
 
@@ -21,8 +22,15 @@ $.ajax({
     url: '/data/',
     success: function(response){
         console.log(response)
-        const data = JSON.parse(response.data)
+        const data = response.data
         console.log(data)
+        data.forEach(el => {
+            postsBox.innerHTML += `
+                ${el.title} - <b>${el.body}</b><br>
+            `
+        });
+        //const data = JSON.parse(response.data)
+        //console.log(data)
     },
     error: function(error){
         console.log(error)
