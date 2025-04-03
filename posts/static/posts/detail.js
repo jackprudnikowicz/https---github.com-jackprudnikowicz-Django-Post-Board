@@ -1,5 +1,5 @@
 console.log('hello')
-
+const postBox = document.getElementById('post-box')
 const backBtn = document.getElementById('back-btn')
 const url = window.location.href + "data/"
 const spinnerBox = document.getElementById('spinner-box')
@@ -16,6 +16,26 @@ $.ajax({
     url: url,
     success: function(response){
         console.log(response)
+        const data = response.data
+
+        if (data.logged_in !== data.author){
+            console.log('different user')
+        } else {
+            console.log('the same user')
+            updateBtn.classList.remove('not-visible')
+            deleteBtn.classList.remove('not-visible')
+        }
+        const titleEl = document.createElement('h3')
+        titleEl.setAttribute('class', 'mt-3')
+        const bodyEl = document.createElement('p')
+        bodyEl.setAttribute('class', 'mt-1')
+
+        titleEl.textContent = data.title
+        bodyEl.textContent = data.body
+
+        postBox.appendChild(titleEl)
+        postBox.appendChild(bodyEl)
+
         spinnerBox.classList.add('not-visible')
     },
     error: function(error){
