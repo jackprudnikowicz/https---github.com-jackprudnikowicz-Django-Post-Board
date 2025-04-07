@@ -19,7 +19,7 @@ class Post(models.Model):
     def like_count(self):
         return self.liked.all().count()
     
-    def get_phots(self):
+    def get_photos(self):
         return self.photo_set.all()
     
     class Meta:
